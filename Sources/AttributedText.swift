@@ -39,7 +39,14 @@ public struct Detection {
     public let type: DetectionType
     public let style: Style
     public let range: Range<String.Index>
-    let level: Int
+    public let level: Int
+    
+    public init(type: DetectionType, style: Style, range: Range<String.Index>, level: Int) {
+        self.type = type
+        self.style = style
+        self.range = range
+        self.level = level
+    }
 }
 
 public protocol AttributedTextProtocol {
@@ -74,7 +81,7 @@ public final class AttributedText: AttributedTextProtocol {
     public let detections: [Detection]
     public let baseStyle: Style
     
-    init(string: String, detections: [Detection], baseStyle: Style) {
+    public init(string: String, detections: [Detection], baseStyle: Style) {
         self.string = string
         self.detections = detections
         self.baseStyle = baseStyle
