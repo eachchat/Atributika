@@ -136,15 +136,16 @@ extension AttributedTextProtocol {
     }
     
     public func styleLinks(_ style: Style) -> AttributedText {
-        let ranges = string.detect(textCheckingTypes: [.link])
+        let str = string.replacingOccurrences(of: "：", with: ":")
+        let ranges = str.detect(textCheckingTypes: [.link])
         
         #if swift(>=4.1)
         let ds = ranges.compactMap { range in
-            URL(string: String(string[range])).map { Detection(type: .link($0), style: style, range: range, level: Int.max) }
+            URL(string: String(str[range])).map { Detection(type: .link($0), style: style, range: range, level: Int.max) }
         }
         #else
         let ds = ranges.flatMap { range in
-            URL(string: String(string[range])).map { Detection(type: .link($0), style: style, range: range) }
+            URL(string: String(str[range])).map { Detection(type: .link($0), style: style, range: range) }
         }
         #endif
         
