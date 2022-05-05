@@ -23,6 +23,10 @@ import UIKit
     private var detectionAreaButtons = [DetectionAreaButton]()
     
     //MARK: - public properties
+    public var internalTextView: UITextView {
+        return textView
+    }
+    
     open var onClick: ((AttributedLabel, Detection)->Void)?
 
     open func rects(for detection: Detection) -> [CGRect] {
